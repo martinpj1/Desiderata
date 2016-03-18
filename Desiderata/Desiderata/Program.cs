@@ -15,7 +15,7 @@ namespace Desiderata
         static int _health = 100;
         public static int Health { get { return _health; } set { _health = value; RefreshHUD(); } }
 
-        static int _martial = 100;
+        static int _martial = 50;
         public static int Martial { get { return _martial; } set { _martial = value; RefreshHUD(); } }
 
         static int _mind = 100;
