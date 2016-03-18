@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using static Desiderata.Engine; 
+using static Desiderata.TextEngine; 
 
 namespace Desiderata
 {
@@ -9,24 +8,31 @@ namespace Desiderata
     {
         static int _coin = 0;
         public static int Coin { get { return _coin; } set { _coin = value; RefreshHUD(); } }
-        static int Fiatus = 100;
+
+        static int _fiatus = 100;
+        public static int Fiatus { get { return _fiatus; } set { _fiatus = value; RefreshHUD(); } }
 
         static int _health = 100;
         public static int Health { get { return _health; } set { _health = value; RefreshHUD(); } }
 
-        static int Martial = 100;
-        static int Mind = 100;
-        static int Power = 100;
+        static int _martial = 100;
+        public static int Martial { get { return _martial; } set { _martial = value; RefreshHUD(); } }
+
+        static int _mind = 100;
+        public static int Mind { get { return _mind; } set { _mind = value; RefreshHUD(); } }
+
+        static int _power = 100;
+        public static int Power { get { return _power; } set { _power = value; RefreshHUD(); } }
 
         static int _strength = 1;
         public static int Strength { get { return _strength; } set { _strength = value; RefreshHUD(); } }
 
-        public static int Virtue = 100;
+        static int _virtue = 1;
+        public static int Virtue { get { return _virtue; } set { _virtue = value; RefreshHUD(); } }
 
         public static LinkedList<Choice> Choices = new LinkedList<Choice>();
         public static List<string> Paragraph = new List<string>();
         
-
         static void Main(string[] args)
         {
             RefreshHUD();
@@ -74,24 +80,11 @@ namespace Desiderata
             }
 
         }
-
         static void TakeTheCoins()
         {
             Coin += 10;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
         static bool BattleResult(double defenderStrength)
         {
             Random r = new Random();

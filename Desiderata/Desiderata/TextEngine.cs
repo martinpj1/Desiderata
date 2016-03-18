@@ -5,7 +5,7 @@ using static Desiderata.Program;
 
 namespace Desiderata
 {
-    public static class Engine
+    public static class TextEngine
     {
         public static void DisplayParagraph()
         {
