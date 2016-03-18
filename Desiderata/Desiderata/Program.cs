@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using static Desiderata.TextEngine; 
+using static Desiderata.TextEngine;
+using static Desiderata.CombatEngine;
 
 namespace Desiderata
 {
@@ -85,20 +86,7 @@ namespace Desiderata
             Coin += 10;
         }
         
-        static bool BattleResult(double defenderStrength)
-        {
-            Random r = new Random();
-            double randomNumber = r.NextDouble();
 
-            if (randomNumber > defenderStrength)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
     }
 }
 
