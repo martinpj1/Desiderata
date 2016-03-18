@@ -9,7 +9,7 @@ namespace Desiderata
         static int _coin = 0;
         public static int Coin { get { return _coin; } set { _coin = value; RefreshHUD(); } }
 
-        static int _fiatus = 100;
+        static int _fiatus = 20;
         public static int Fiatus { get { return _fiatus; } set { _fiatus = value; RefreshHUD(); } }
 
         static int _health = 100;
