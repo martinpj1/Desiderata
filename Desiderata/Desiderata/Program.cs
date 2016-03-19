@@ -42,12 +42,11 @@ namespace Desiderata
             if (BattleResult(0.07))
             {
                 Strength += 10;
-                Paragraph.Add("You licked the man... Not literally");
                 Paragraph.Add("The man lays unconsious upon the ground. His body twitches ever so slightly, but you are sure he is beaten");
                 Paragraph.Add("The sachel has fallen from his back and it's contents lay naked upon the ground.");
                 Paragraph.Add("A great leather book lays on the dusty trail with a bag of coins lying upon it.");
 
-                Choices.AddFirst(new Choice("Plunder his booty... ummmm ", () => TakeTheCoins()));
+                Choices.AddFirst(new Choice("Take his coins ", () => TakeTheCoins()));
                 DisplayChoices();
             }
             else
