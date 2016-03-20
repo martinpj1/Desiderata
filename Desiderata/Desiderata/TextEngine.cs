@@ -6,6 +6,8 @@ using static Desiderata.Player;
 
 namespace Desiderata
 {
+    //TODO: fix multiple row choices refreshing correctly
+    //TODO: find a more elegant way of handling the HUD other than overloading the Display methods
     public static class TextEngine
     {
         static int sleepTime = 25;
@@ -70,7 +72,7 @@ namespace Desiderata
                 RefreshHUD();
         }
 
-        //TODO: fix multiple row choices refreshing correctly
+
         public static void DisplayChoices()
         {
             LinkedListNode<Choice> SelectedChoice = Choices.First;
