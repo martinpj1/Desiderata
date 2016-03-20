@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using static Desiderata.TextEngine;
 using static Desiderata.CombatEngine;
 using static Desiderata.Player;
+using static Desiderata.MainMenu;
 
 namespace Desiderata
 {
@@ -13,8 +14,12 @@ namespace Desiderata
         
         static void Main(string[] args)
         {
+            DisplayMainMenu();
+        }
+
+        public static void AManApproaches()
+        {
             RefreshHUD();
-            Console.CursorVisible = false;
 
             Paragraph.Add("A man approches you upon the road.");
             Paragraph.Add("He is haggerd and old. His skin glistens");
@@ -27,7 +32,6 @@ namespace Desiderata
             Choices.AddFirst(new Choice("Excuse me sir, but might I bare your load for a mile?", () => BareTheLoad()));
             Choices.AddAfter(Choices.Last, new Choice("Give me all you have! I know that look in one's eye and I trust not your perplexion for it speaks of inner maddness untold! *you raise your fists*", () => FightTheOldMan()));
             DisplayChoices();
-
         }
 
         static void BareTheLoad()
