@@ -30,7 +30,7 @@ namespace Desiderata
             Paragraph.Add("The lines run deep in his face and the hair upon his head hints at wisdom untold, or is it the stresses of madness that has taken their color and left them bleached in silver?");
             Paragraph.Add("I wonder if I should talk with the man...");
             Choices.AddFirst(new Choice("Excuse me sir, but might I bare your load for a mile?", () => BareTheLoad()));
-            Choices.AddAfter(Choices.Last, new Choice("Give me all you have! I know that look in one's eye and I trust not your perplexion for it speaks of inner maddness untold! *you raise your fists*", () => FightTheOldMan()));
+            Choices.AddAfter(Choices.Last, new Choice("Give me all you have! I know that look in one's eye and I trust not your perplextion for it speaks of inner madness untold! *you raise your fists*", () => FightTheOldMan()));
             DisplayChoices();
         }
 
