@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using static Desiderata.TextEngine;
+﻿using System.Collections.Generic;
 using static Desiderata.CombatEngine;
-using static Desiderata.Player;
 using static Desiderata.MainMenu;
+using static Desiderata.Player;
+using static Desiderata.TextEngine;
 
 namespace Desiderata
 {
@@ -39,6 +38,7 @@ namespace Desiderata
             Paragraph.Add("You have chosen to bare the old man's load and walk with him for a mile");
             DisplayParagraph();
         }
+
         static void FightTheOldMan()
         {
             Paragraph.Add("You have chosen to bare your fists and fight the old man");
@@ -61,11 +61,11 @@ namespace Desiderata
             }
 
         }
+
         static void TakeTheCoins()
         {
             Coin += 10;
         }
-        
 
     }
 }
