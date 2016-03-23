@@ -47,14 +47,14 @@ namespace Desiderata
                     Console.Write(c);
                     Thread.Sleep(sleepTime);
                 }
-                Console.Write("\n\n");
+                Console.Write("\n");
             }
+            Console.Write("\n");
             Console.WriteLine("Press <Enter> to continue... ");
             Console.WriteLine("I C T");
 
-            if (-1 < Console.In.Peek())
-                Console.In.ReadToEnd();
-            
+            while (Console.KeyAvailable) { Console.ReadKey(true); }
+
             do
             {
                 pressedKey = Console.ReadKey(true).Key;
@@ -88,13 +88,13 @@ namespace Desiderata
                     Console.Write(c);
                     Thread.Sleep(sleepTime);
                 }
-                Console.Write("\n\n");
+                Console.Write("\n");
             }
+            Console.Write("\n");
             Console.WriteLine("Press <Enter> to continue... ");
             Console.WriteLine("I C T");
 
-            if (-1 < Console.In.Peek())
-                Console.In.ReadToEnd();
+            while (Console.KeyAvailable) { Console.ReadKey(true); }
 
             do
             {
@@ -112,6 +112,7 @@ namespace Desiderata
                     ShowTranscript();
                 }
             } while (pressedKey != ConsoleKey.Enter);
+
             Console.Clear();
             Paragraph.Clear();
             if(!suppressHUD)
