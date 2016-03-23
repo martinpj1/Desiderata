@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using static Desiderata.Program;
 using static Desiderata.Player;
+using static Desiderata.Menu;
 
 namespace Desiderata
 {
@@ -36,6 +37,8 @@ namespace Desiderata
 
         public static void DisplayParagraph()
         {
+            ConsoleKey pressedKey;
+
             foreach (string line in Paragraph)
             {
                 //Console.WriteLine(line);
@@ -44,16 +47,39 @@ namespace Desiderata
                     Console.Write(c);
                     Thread.Sleep(sleepTime);
                 }
-                Console.Write("\n");
+                Console.Write("\n\n");
             }
-            Console.Write("Press <Enter> to continue... ");
-            while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
+            Console.WriteLine("Press <Enter> to continue... ");
+            Console.WriteLine("I C T");
+
+            if (-1 < Console.In.Peek())
+                Console.In.ReadToEnd();
+            
+            do
+            {
+                pressedKey = Console.ReadKey(true).Key;
+                if (pressedKey == ConsoleKey.I)
+                {
+                    ShowInventory();
+                }
+                else if (pressedKey == ConsoleKey.C)
+                {
+                    ShowCharacterStats();
+                }
+                else if (pressedKey == ConsoleKey.T)
+                {
+                    ShowTranscript();
+                }
+            } while (pressedKey != ConsoleKey.Enter);
+
             Console.Clear();
             Paragraph.Clear();
             RefreshHUD();
         }
         public static void DisplayParagraph(bool suppressHUD)
         {
+            ConsoleKey pressedKey;
+
             foreach (string line in Paragraph)
             {
                 //Console.WriteLine(line);
@@ -62,10 +88,30 @@ namespace Desiderata
                     Console.Write(c);
                     Thread.Sleep(sleepTime);
                 }
-                Console.Write("\n");
+                Console.Write("\n\n");
             }
-            Console.Write("Press <Enter> to continue... ");
-            while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
+            Console.WriteLine("Press <Enter> to continue... ");
+            Console.WriteLine("I C T");
+
+            if (-1 < Console.In.Peek())
+                Console.In.ReadToEnd();
+
+            do
+            {
+                pressedKey = Console.ReadKey(true).Key;
+                if (pressedKey == ConsoleKey.I)
+                {
+                    ShowInventory();
+                }
+                else if (pressedKey == ConsoleKey.C)
+                {
+                    ShowCharacterStats();
+                }
+                else if (pressedKey == ConsoleKey.T)
+                {
+                    ShowTranscript();
+                }
+            } while (pressedKey != ConsoleKey.Enter);
             Console.Clear();
             Paragraph.Clear();
             if(!suppressHUD)

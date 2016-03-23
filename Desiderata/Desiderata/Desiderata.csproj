@@ -45,6 +45,7 @@
     <Compile Include="Choice.cs" />
     <Compile Include="CombatEngine.cs" />
     <Compile Include="MainMenu.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="TextEngine.cs" />
     <Compile Include="Program.cs" />
