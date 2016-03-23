@@ -6,12 +6,12 @@ using static Desiderata.TextEngine;
 
 namespace Desiderata
 {
-    class Program
+    internal class Program
     {
         public static LinkedList<Choice> Choices = new LinkedList<Choice>();
         public static List<string> Paragraph = new List<string>();
-        
-        static void Main(string[] args)
+
+        private static void Main(string[] args)
         {
             DisplayMainMenu();
         }
@@ -25,7 +25,6 @@ namespace Desiderata
             Paragraph.Add("in a cold sweat and the moon shines like mercury in the reflection of his eyes.");
             DisplayParagraph();
 
-
             Paragraph.Add("The lines run deep in his face and the hair upon his head hints at wisdom untold, or is it the stresses of madness that has taken their color and left them bleached in silver?");
             Paragraph.Add("I wonder if I should talk with the man...");
             Choices.AddFirst(new Choice("Excuse me sir, but might I bare your load for a mile?", () => BareTheLoad()));
@@ -33,13 +32,13 @@ namespace Desiderata
             DisplayChoices();
         }
 
-        static void BareTheLoad()
+        private static void BareTheLoad()
         {
             Paragraph.Add("You have chosen to bare the old man's load and walk with him for a mile");
             DisplayParagraph();
         }
 
-        static void FightTheOldMan()
+        private static void FightTheOldMan()
         {
             Paragraph.Add("You have chosen to bare your fists and fight the old man");
             DisplayParagraph();
@@ -59,16 +58,11 @@ namespace Desiderata
                 Paragraph.Add("He stuck his cane through your eye socket... Ouch!");
                 DisplayParagraph();
             }
-
         }
 
-        static void TakeTheCoins()
+        private static void TakeTheCoins()
         {
             Coin += 10;
         }
-
     }
 }
-
-
-

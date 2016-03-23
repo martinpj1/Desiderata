@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using static Desiderata.Program;
-using static Desiderata.Player;
 using static Desiderata.Menu;
+using static Desiderata.Player;
+using static Desiderata.Program;
 
 namespace Desiderata
 {
@@ -11,29 +11,35 @@ namespace Desiderata
     //TODO: find a more elegant way of handling the HUD other than overloading the Display methods
     public static class TextEngine
     {
-        static int sleepTime = 25;
-        static ScrollingSpeed _scrollSpeed = ScrollingSpeed.Normal;
-        public static ScrollingSpeed scrollSpeed {
+        private static int sleepTime = 25;
+        private static ScrollingSpeed _scrollSpeed = ScrollingSpeed.Normal;
+
+        public static ScrollingSpeed scrollSpeed
+        {
             get { return _scrollSpeed; }
-            set {
+            set
+            {
                 _scrollSpeed = value;
                 switch (_scrollSpeed)
                 {
                     case ScrollingSpeed.Slow:
-                        sleepTime = 50; 
+                        sleepTime = 50;
                         break;
+
                     case ScrollingSpeed.Normal:
-                        sleepTime = 25; 
+                        sleepTime = 25;
                         break;
+
                     case ScrollingSpeed.Fast:
                         sleepTime = 15;
                         break;
+
                     case ScrollingSpeed.Instant:
                         sleepTime = 0;
                         break;
                 }
-
-            } }
+            }
+        }
 
         public static void DisplayParagraph()
         {
@@ -76,6 +82,7 @@ namespace Desiderata
             Paragraph.Clear();
             RefreshHUD();
         }
+
         public static void DisplayParagraph(bool suppressHUD)
         {
             ConsoleKey pressedKey;
@@ -115,10 +122,9 @@ namespace Desiderata
 
             Console.Clear();
             Paragraph.Clear();
-            if(!suppressHUD)
+            if (!suppressHUD)
                 RefreshHUD();
         }
-
 
         public static void DisplayChoices()
         {
@@ -166,7 +172,6 @@ namespace Desiderata
 
                 Console.CursorTop = SelectedChoice.Value.Row;
                 Console.WriteLine("> " + SelectedChoice.Value.DisplayText);
-
             } while (pressedKey != ConsoleKey.Enter);
 
             Paragraph.Clear();
@@ -175,6 +180,7 @@ namespace Desiderata
             RefreshHUD();
             SelectedChoice.Value.Method.Invoke();
         }
+
         public static void DisplayChoices(bool suppressHUD)
         {
             LinkedListNode<Choice> SelectedChoice = Choices.First;
@@ -221,13 +227,12 @@ namespace Desiderata
 
                 Console.CursorTop = SelectedChoice.Value.Row;
                 Console.WriteLine("> " + SelectedChoice.Value.DisplayText);
-
             } while (pressedKey != ConsoleKey.Enter);
 
             Paragraph.Clear();
             Choices.Clear();
             Console.Clear();
-            if(!suppressHUD)
+            if (!suppressHUD)
                 RefreshHUD();
             SelectedChoice.Value.Method.Invoke();
         }
@@ -242,7 +247,7 @@ namespace Desiderata
             ClearCurrentConsoleLine();
             Console.SetCursorPosition(0, 21);
             ClearCurrentConsoleLine();
-            
+
             //HEALTH (5-24,20)
             var healthBar = $"{Health}/100";
             centerString(ref healthBar, 20);
@@ -285,15 +290,18 @@ namespace Desiderata
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, currentLineCursor);
         }
+
         public static void centerString(ref string stringToCenter, int totalWidth)
         {
             stringToCenter = new string(' ', spacesToPrefix(stringToCenter.Length, totalWidth)) + stringToCenter + new string(' ', spacesToAppend(stringToCenter.Length, totalWidth));
         }
+
         public static int spacesToPrefix(int stringLength, int totalWidth)
         {
             int extraSpace = (totalWidth - stringLength);
             return extraSpace / 2;
         }
+
         public static int spacesToAppend(int stringLength, int totalWidth)
         {
             int extraSpace = (totalWidth - stringLength);
@@ -311,5 +319,4 @@ namespace Desiderata
         Fast,
         Instant
     }
-
 }

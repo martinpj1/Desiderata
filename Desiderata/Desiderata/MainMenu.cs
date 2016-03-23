@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Desiderata.Program;
 using static Desiderata.TextEngine;
 
@@ -10,7 +6,8 @@ namespace Desiderata
 {
     public static class MainMenu
     {
-        static int mainMenuWidth = 50;
+        private static int mainMenuWidth = 50;
+
         public static void DisplayMainMenu()
         {
             Console.CursorVisible = false;
@@ -26,10 +23,9 @@ namespace Desiderata
             Choices.AddFirst(new Choice(newGame, () => AManApproaches()));
             Choices.AddAfter(Choices.Last, new Choice(options, () => OptionsMenu()));
             DisplayChoices(true);
-
         }
 
-        static void OptionsMenu()
+        private static void OptionsMenu()
         {
             Paragraph.Add("Set scroll speed");
             Choices.AddFirst(new Choice("SLOW", () => scrollSpeed = ScrollingSpeed.Slow));
@@ -39,6 +35,5 @@ namespace Desiderata
             DisplayChoices(true);
             DisplayMainMenu();
         }
-     
     }
 }
