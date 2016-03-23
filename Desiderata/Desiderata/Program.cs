@@ -29,7 +29,7 @@ namespace Desiderata
             Paragraph.Add("The lines run deep in his face and the hair upon his head hints at wisdom untold, or is it the stresses of madness that has taken their color and left them bleached in silver?");
             Paragraph.Add("I wonder if I should talk with the man...");
             Choices.AddFirst(new Choice("Excuse me sir, but might I bare your load for a mile?", () => BareTheLoad()));
-            Choices.AddAfter(Choices.Last, new Choice("Give me all you have! I know that look in one's eye and I trust not your perplexion for it speaks of inner maddness untold! *you raise your fists*", () => FightTheOldMan()));
+            Choices.AddAfter(Choices.Last, new Choice("Give me all you have! I know that look in one's eye and I trust not your perplextion for it speaks of inner madness untold! *you raise your fists*", () => FightTheOldMan()));
             DisplayChoices();
         }
 
@@ -46,8 +46,8 @@ namespace Desiderata
             if (BattleResult(0.07))
             {
                 Strength += 10;
-                Paragraph.Add("The man lays unconsious upon the ground. His body twitches ever so slightly, but you are sure he is beaten");
-                Paragraph.Add("The sachel has fallen from his back and it's contents lay naked upon the ground.");
+                Paragraph.Add("The man lays unconscious upon the ground. His body twitches ever so slightly, but you are sure he is beaten");
+                Paragraph.Add("The satchel has fallen from his back and its contents lay naked upon the ground.");
                 Paragraph.Add("A great leather book lays on the dusty trail with a bag of coins lying upon it.");
 
                 Choices.AddFirst(new Choice("Take his coins ", () => TakeTheCoins()));
