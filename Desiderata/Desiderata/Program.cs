@@ -36,6 +36,12 @@ namespace Desiderata
         {
             Paragraph.Add("You have chosen to bare the old man's load and walk with him for a mile");
             DisplayParagraph();
+            { Mind += 15;
+              Strength += 3;
+                Paragraph.Add("As you walk with the old man, he tells you of stories of great battles, concepts of wealth creation, and concepts that boggle the mind.");
+                Paragraph.Add("You think to yourself, “Truly this wisdom was well worth the burden of his load. I only wish we weren’t parting ways at this fork.”");
+                Paragraph.Add("As the man disappears in the distance you now know what it is like to be in the presence of a truly wise man.");
+                    }
         }
 
         private static void FightTheOldMan()
