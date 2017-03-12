@@ -8,6 +8,7 @@
 
         public static void ShowCharacterStats()
         {
+
         }
 
         public static void ShowTranscript()

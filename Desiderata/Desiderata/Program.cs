@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using static Desiderata.CombatEngine;
 using static Desiderata.MainMenu;
 using static Desiderata.Player;
 using static Desiderata.TextEngine;
+using static System.Console;
+using static ConsoleExtender.ConsoleHelper; 
 
 namespace Desiderata
 {
@@ -13,7 +16,15 @@ namespace Desiderata
 
         private static void Main(string[] args)
         {
+            Title = "Desiderata";
+            CursorVisible = false;
+            
+            DisableQuickEdit(); 
+            SetConsoleFont(16);
+            SetFullScreen();
+            ChangeResolution(1280, 720);
             DisplayMainMenu();
+            ChangeResolution(retainWidth, retainHeight);
         }
 
         public static void AManApproaches()
@@ -22,7 +33,8 @@ namespace Desiderata
 
             Paragraph.Add("A man approches you upon the road.");
             Paragraph.Add("He is haggerd and old. His skin glistens");
-            Paragraph.Add("in a cold sweat and the moon shines like mercury in the reflection of his eyes.");
+            Paragraph.Add("in a cold sweat and the moon shines like mercury");
+            Paragraph.Add("in the reflection of his eyes.");
             DisplayParagraph();
 
             Paragraph.Add("The lines run deep in his face and the hair upon his head hints at wisdom untold, or is it the stresses of madness that has taken their color and left them bleached in silver?");
