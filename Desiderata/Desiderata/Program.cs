@@ -63,8 +63,10 @@ namespace Desiderata
             if (BattleResult(0.07))
             {
                 Strength += 10;
+
                 Paragraph.Add("The man lays unconscious upon the ground. His body twitches ever so slightly, but you are sure he is beaten");
                 Paragraph.Add("The satchel has fallen from his back and its contents lay naked upon the ground.");
+
                 Paragraph.Add("A great leather book lays on the dusty trail with a bag of coins lying upon it.");
 
                 Choices.AddFirst(new Choice("Take his coins ", () => TakeTheCoins()));
