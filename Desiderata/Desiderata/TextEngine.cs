@@ -1,86 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using static Desiderata.Program;
+using static Desiderata.Menu;
 using static Desiderata.Player;
+using static Desiderata.Program;
 
 namespace Desiderata
 {
-    //TODO: fix multiple row choices refreshing correctly
     //TODO: find a more elegant way of handling the HUD other than overloading the Display methods
     public static class TextEngine
     {
-        static int sleepTime = 25;
-        static ScrollingSpeed _scrollSpeed = ScrollingSpeed.Normal;
-        public static ScrollingSpeed scrollSpeed {
+        private static int sleepTime = 25;
+        private static ScrollingSpeed _scrollSpeed = ScrollingSpeed.Normal;
+
+        public static ScrollingSpeed scrollSpeed
+        {
             get { return _scrollSpeed; }
-            set {
+            set
+            {
                 _scrollSpeed = value;
                 switch (_scrollSpeed)
                 {
                     case ScrollingSpeed.Slow:
-                        sleepTime = 50; 
+                        sleepTime = 50;
                         break;
+
                     case ScrollingSpeed.Normal:
-                        sleepTime = 25; 
+                        sleepTime = 25;
                         break;
+
                     case ScrollingSpeed.Fast:
                         sleepTime = 15;
                         break;
+
                     case ScrollingSpeed.Instant:
                         sleepTime = 0;
                         break;
                 }
-
-            } }
-
-        public static void DisplayParagraph()
-        {
-            foreach (string line in Paragraph)
-            {
-                //Console.WriteLine(line);
-                foreach (char c in line)
-                {
-                    Console.Write(c);
-                    Thread.Sleep(sleepTime);
-                }
-                Console.Write("\n");
             }
-            Console.Write("Press <Enter> to continue... ");
-            while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
-            Console.Clear();
-            Paragraph.Clear();
-            RefreshHUD();
-        }
-        public static void DisplayParagraph(bool suppressHUD)
-        {
-            foreach (string line in Paragraph)
-            {
-                //Console.WriteLine(line);
-                foreach (char c in line)
-                {
-                    Console.Write(c);
-                    Thread.Sleep(sleepTime);
-                }
-                Console.Write("\n");
-            }
-            Console.Write("Press <Enter> to continue... ");
-            while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
-            Console.Clear();
-            Paragraph.Clear();
-            if(!suppressHUD)
-                RefreshHUD();
         }
 
-
-        public static void DisplayChoices()
+        public static void DisplayParagraph(bool withContinue = true)
         {
-            LinkedListNode<Choice> SelectedChoice = Choices.First;
-            ConsoleKey pressedKey;
-
             foreach (string line in Paragraph)
             {
-                //Console.WriteLine(line);
                 foreach (char c in line)
                 {
                     Console.Write(c);
@@ -89,6 +52,52 @@ namespace Desiderata
                 Console.Write("\n");
             }
             Console.Write("\n");
+
+            if (withContinue)
+                PauseForContinue();
+
+        }
+
+        public static void PauseForContinue()
+        {
+            ConsoleKey pressedKey;
+
+            Console.WriteLine("Press <Enter> to continue... ");
+
+            while (Console.KeyAvailable) { Console.ReadKey(true); }
+
+            do
+            {
+                pressedKey = Console.ReadKey(true).Key;
+                if (pressedKey == ConsoleKey.I)
+                {
+                    ShowInventory();
+                }
+                else if (pressedKey == ConsoleKey.C)
+                {
+                    ShowCharacterStats();
+                }
+                else if (pressedKey == ConsoleKey.T)
+                {
+                    ShowTranscript();
+                }
+            } while (pressedKey != ConsoleKey.Enter);
+
+            Console.Clear();
+            Paragraph.Clear();
+            RefreshHUD();
+        }
+
+        /// <summary>
+        /// Show choices available and wait for selection
+        /// </summary>
+        /// <param name="suppressHUD"></param>
+        public static void DisplayChoices(bool suppressHUD = false)
+        {
+            LinkedListNode<Choice> SelectedChoice = Choices.First;
+            ConsoleKey pressedKey;
+
+            DisplayParagraph(false); 
 
             foreach (var choice in Choices)
             {
@@ -105,82 +114,24 @@ namespace Desiderata
                 if (pressedKey == ConsoleKey.UpArrow && SelectedChoice != Choices.First)
                 {
                     Console.CursorTop = SelectedChoice.Value.Row;
-                    ClearCurrentConsoleLine();
-                    Console.WriteLine(SelectedChoice.Value.DisplayText);
+                    Console.WriteLine($"{SelectedChoice.Value.DisplayText}  ");
                     SelectedChoice = SelectedChoice.Previous;
                 }
                 else if (pressedKey == ConsoleKey.DownArrow && SelectedChoice != Choices.Last)
                 {
                     Console.CursorTop = SelectedChoice.Value.Row;
-                    ClearCurrentConsoleLine();
-                    Console.WriteLine(SelectedChoice.Value.DisplayText);
+                    Console.WriteLine($"{SelectedChoice.Value.DisplayText}  ");
                     SelectedChoice = SelectedChoice.Next;
                 }
 
                 Console.CursorTop = SelectedChoice.Value.Row;
                 Console.WriteLine("> " + SelectedChoice.Value.DisplayText);
-
             } while (pressedKey != ConsoleKey.Enter);
 
             Paragraph.Clear();
             Choices.Clear();
             Console.Clear();
-            RefreshHUD();
-            SelectedChoice.Value.Method.Invoke();
-        }
-        public static void DisplayChoices(bool suppressHUD)
-        {
-            LinkedListNode<Choice> SelectedChoice = Choices.First;
-            ConsoleKey pressedKey;
-
-            foreach (string line in Paragraph)
-            {
-                //Console.WriteLine(line);
-                foreach (char c in line)
-                {
-                    Console.Write(c);
-                    Thread.Sleep(sleepTime);
-                }
-                Console.Write("\n");
-            }
-            Console.Write("\n");
-
-            foreach (var choice in Choices)
-            {
-                choice.Row = Console.CursorTop;
-                Console.WriteLine(choice.DisplayText);
-            }
-
-            Console.CursorTop = SelectedChoice.Value.Row;
-            Console.WriteLine("> " + SelectedChoice.Value.DisplayText);
-
-            do
-            {
-                pressedKey = Console.ReadKey(true).Key;
-                if (pressedKey == ConsoleKey.UpArrow && SelectedChoice != Choices.First)
-                {
-                    Console.CursorTop = SelectedChoice.Value.Row;
-                    ClearCurrentConsoleLine();
-                    Console.WriteLine(SelectedChoice.Value.DisplayText);
-                    SelectedChoice = SelectedChoice.Previous;
-                }
-                else if (pressedKey == ConsoleKey.DownArrow && SelectedChoice != Choices.Last)
-                {
-                    Console.CursorTop = SelectedChoice.Value.Row;
-                    ClearCurrentConsoleLine();
-                    Console.WriteLine(SelectedChoice.Value.DisplayText);
-                    SelectedChoice = SelectedChoice.Next;
-                }
-
-                Console.CursorTop = SelectedChoice.Value.Row;
-                Console.WriteLine("> " + SelectedChoice.Value.DisplayText);
-
-            } while (pressedKey != ConsoleKey.Enter);
-
-            Paragraph.Clear();
-            Choices.Clear();
-            Console.Clear();
-            if(!suppressHUD)
+            if (!suppressHUD)
                 RefreshHUD();
             SelectedChoice.Value.Method.Invoke();
         }
@@ -191,15 +142,16 @@ namespace Desiderata
             ConsoleColor prevForegroundColor = Console.ForegroundColor;
             ConsoleColor prevBackgroundColor = Console.BackgroundColor;
 
+            //Clear the health row
             Console.SetCursorPosition(0, 20);
             ClearCurrentConsoleLine();
             Console.SetCursorPosition(0, 21);
             ClearCurrentConsoleLine();
-            
+
             //HEALTH (5-24,20)
             var healthBar = $"{Health}/100";
             centerString(ref healthBar, 20);
-
+            
             Console.SetCursorPosition(5, 20);
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             for (int i = 0; i < Health / 5; i++)
@@ -238,15 +190,18 @@ namespace Desiderata
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, currentLineCursor);
         }
+
         public static void centerString(ref string stringToCenter, int totalWidth)
         {
             stringToCenter = new string(' ', spacesToPrefix(stringToCenter.Length, totalWidth)) + stringToCenter + new string(' ', spacesToAppend(stringToCenter.Length, totalWidth));
         }
+
         public static int spacesToPrefix(int stringLength, int totalWidth)
         {
             int extraSpace = (totalWidth - stringLength);
             return extraSpace / 2;
         }
+
         public static int spacesToAppend(int stringLength, int totalWidth)
         {
             int extraSpace = (totalWidth - stringLength);
@@ -264,5 +219,4 @@ namespace Desiderata
         Fast,
         Instant
     }
-
 }

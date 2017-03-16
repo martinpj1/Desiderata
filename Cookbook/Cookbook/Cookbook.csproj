@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9927A13A-ACF6-405B-93A0-7A04EB728012}</ProjectGuid>
+    <ProjectGuid>{E1858D30-EA07-4872-ABB1-656B0F58A500}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Desiderata</RootNamespace>
-    <AssemblyName>Desiderata</AssemblyName>
+    <RootNamespace>Cookbook</RootNamespace>
+    <AssemblyName>Cookbook</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -43,13 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Choice.cs" />
-    <Compile Include="CombatEngine.cs" />
-    <Compile Include="ConsoleHelper.cs" />
-    <Compile Include="MainMenu.cs" />
-    <Compile Include="Menu.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="TextEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
