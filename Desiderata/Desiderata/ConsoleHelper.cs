@@ -96,16 +96,20 @@ namespace ConsoleExtender
         //}
         #endregion
 
+        public static void AdjustBuffer()
+        {
+            //This is to hide the scroll bar
+            Console.BufferWidth = Console.WindowWidth = Console.LargestWindowWidth;
+            Console.BufferHeight = Console.WindowHeight = Console.LargestWindowHeight;
+        }
+
         #region FULLSCREEN
         public static void SetFullScreen()
         {
             var screenBuffer = GetStdHandle(StdHandle.OutputHandle);
             COORD fullscreenDimension;
             SetConsoleDisplayMode(screenBuffer, 1, out fullscreenDimension);
-            
-            //This is to hide the scroll bar
-            Console.BufferWidth = Console.WindowWidth;
-            Console.BufferHeight = Console.WindowHeight;
+            AdjustBuffer();
         }
 
 
@@ -171,10 +175,8 @@ namespace ConsoleExtender
                                 //wait for the screen size to actually change
                                 //when the font and the screen size are right... 
                                 //the console window width will be 126
-                                        
-                                //This is to hide the scroll bar
-                                Console.BufferWidth = Console.WindowWidth;
-                                Console.BufferHeight = Console.WindowHeight;
+
+                                AdjustBuffer();
                                 break;
                             }
                         case DISP_CHANGE_RESTART:
@@ -261,8 +263,7 @@ namespace ConsoleExtender
                     SetCurrentConsoleFontEx(hnd, false, ref newInfo);
                 }
             }
-            Console.BufferWidth = Console.WindowWidth;
-            Console.BufferHeight = Console.WindowHeight; 
+            AdjustBuffer();
         }
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         unsafe public struct CONSOLE_FONT_INFO_EX

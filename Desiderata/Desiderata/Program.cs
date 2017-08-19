@@ -5,32 +5,61 @@ using static Desiderata.MainMenu;
 using static Desiderata.Player;
 using static Desiderata.TextEngine;
 using static System.Console;
-using static ConsoleExtender.ConsoleHelper; 
+using static ConsoleExtender.ConsoleHelper;
+using System.Media;
+using System.Threading;
 
 namespace Desiderata
 {
     internal class Program
     {
+        //TODO: flush the input buffer regularly
         public static LinkedList<Choice> Choices = new LinkedList<Choice>();
         public static List<string> Paragraph = new List<string>();
 
+        static SoundPlayer mainMenuMusic = new SoundPlayer(Environment.CurrentDirectory + "\\Vikings.wav"); 
         private static void Main(string[] args)
         {
             Title = "Desiderata";
-            CursorVisible = false;
             
+            CursorVisible = false;
             DisableQuickEdit(); 
             SetConsoleFont(16);
             SetFullScreen();
             ChangeResolution(1280, 720);
+            mainMenuMusic.Play();
+
+            //This is the entry point for the actual gameplay
             DisplayMainMenu();
+            
+            //Change the screen resolution back to what it started as
             ChangeResolution(retainWidth, retainHeight);
+          //160, 45
+          //1280, 720
         }
+
+        static System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+        public static void Exp()
+        {
+            stopwatch.Start();
+            BackgroundColor = ConsoleColor.DarkRed; 
+            for (int i = 0; i < WindowWidth; i++)
+                for(int j = 0; j < WindowHeight; j++)
+                {
+                    Write(' '); 
+                }
+            CursorLeft = 0;
+            CursorTop = 0;
+            BackgroundColor = ConsoleColor.Black;
+            stopwatch.Stop();
+        }
+
+
 
         public static void AManApproaches()
         {
             RefreshHUD();
-
+          
             Paragraph.Add("A man approches you upon the road.");
             Paragraph.Add("He is haggerd and old. His skin glistens");
             Paragraph.Add("in a cold sweat and the moon shines like mercury");
@@ -48,12 +77,15 @@ namespace Desiderata
         {
             Paragraph.Add("You have chosen to bare the old man's load and walk with him for a mile");
             DisplayParagraph();
-            { Mind += 15;
-              Strength += 3;
+            {
+                Mind += 15;
+                Strength += 3;
+
                 Paragraph.Add("As you walk with the old man, he tells you of stories of great battles, concepts of wealth creation, and concepts that boggle the mind.");
                 Paragraph.Add("You think to yourself, “Truly this wisdom was well worth the burden of his load. I only wish we weren’t parting ways at this fork.”");
                 Paragraph.Add("As the man disappears in the distance you now know what it is like to be in the presence of a truly wise man.");
-                    }
+
+            }
         }
 
         private static void FightTheOldMan()
